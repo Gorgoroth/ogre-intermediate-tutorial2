@@ -455,6 +455,11 @@ CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/OgreWi
 CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/OgreWorkQueue.h
 CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/SdkCameraMan.h
 CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/SdkTrays.h
+CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/Terrain/OgreTerrain.h
+CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/Terrain/OgreTerrainGroup.h
+CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/Terrain/OgreTerrainLayerBlendMap.h
+CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/Terrain/OgreTerrainMaterialGenerator.h
+CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/Terrain/OgreTerrainPrerequisites.h
 CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/Threading/OgreThreadDefines.h
 CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/Threading/OgreThreadDefinesBoost.h
 CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o: /usr/local/include/OGRE/Threading/OgreThreadHeaders.h

@@ -31,14 +31,16 @@ public:
 protected:
     virtual void createScene(void);
     virtual void destroyScene(void);
-    virtual void chooseSceneManager(void);
+
     virtual void createFrameListener(void);
-    virtual bool frameRenderingQueued(const Ogre::FrameEvent &evt); //frame listener
-    virtual bool mouseMoved(const OIS::MouseEvent &arg); //mouse listener
+    // frame listener
+    virtual bool frameRenderingQueued(const Ogre::FrameEvent &evt);
+
+    //mouse listeners
+    virtual bool mouseMoved(const OIS::MouseEvent &arg);
     virtual bool mousePressed(const OIS::MouseEvent &arg,OIS::MouseButtonID id);
     virtual bool mouseReleased(const OIS::MouseEvent &arg,OIS::MouseButtonID id);
 
-    Ogre::RaySceneQuery *mRaySceneQuery;// The ray scene query pointer
     bool mLMouseDown, mRMouseDown;		// True if the mouse buttons are down
     int mCount;							// The number of robots on the screen
     Ogre::SceneNode *mCurrentObject;	// The newly created object

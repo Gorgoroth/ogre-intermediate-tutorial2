@@ -456,6 +456,11 @@ CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o
  /usr/local/include/OGRE/OgreWorkQueue.h
  /usr/local/include/OGRE/SdkCameraMan.h
  /usr/local/include/OGRE/SdkTrays.h
+ /usr/local/include/OGRE/Terrain/OgreTerrain.h
+ /usr/local/include/OGRE/Terrain/OgreTerrainGroup.h
+ /usr/local/include/OGRE/Terrain/OgreTerrainLayerBlendMap.h
+ /usr/local/include/OGRE/Terrain/OgreTerrainMaterialGenerator.h
+ /usr/local/include/OGRE/Terrain/OgreTerrainPrerequisites.h
  /usr/local/include/OGRE/Threading/OgreThreadDefines.h
  /usr/local/include/OGRE/Threading/OgreThreadDefinesBoost.h
  /usr/local/include/OGRE/Threading/OgreThreadHeaders.h

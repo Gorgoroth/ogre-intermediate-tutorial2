@@ -139,13 +139,12 @@ void TutorialApplication::createScene(void)
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
     mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8);
 
-    // World geometry
-    mSceneMgr->setWorldGeometry("terrain.cfg");
 
     // Set camera look point
-    mCamera->setPosition(40, 100, 580);
+    mCamera->setPosition(Ogre::Vector3(1683, 300, 2116));
     mCamera->pitch(Ogre::Degree(-30));
     mCamera->yaw(Ogre::Degree(-45));
+
 
     // CEGUI setup
     mGUIRenderer = &CEGUI::OgreRenderer::bootstrapSystem();
@@ -153,45 +152,191 @@ void TutorialApplication::createScene(void)
     // Mouse
     CEGUI::SchemeManager::getSingleton().create((CEGUI::utf8*)"TaharezLook.scheme");
     CEGUI::MouseCursor::getSingleton().setImage("TaharezLook", "MouseArrow");
+
+    // Light
+    Ogre::Vector3 lightdir(0.55, -0.3, 0.75);
+    lightdir.normalise();
+
+    Ogre::Light* light = mSceneMgr->createLight("tstLight");
+    light->setType(Ogre::Light::LT_DIRECTIONAL);
+    light->setDirection(lightdir);
+    light->setDiffuseColour(Ogre::ColourValue::White);
+    light->setSpecularColour(Ogre::ColourValue(0.4, 0.4, 0.4));
+
+
+    // Terrain
+    mTerrainGlobals = OGRE_NEW Ogre::TerrainGlobalOptions();
+
+    mTerrainGroup = OGRE_NEW Ogre::TerrainGroup(mSceneMgr, Ogre::Terrain::ALIGN_X_Z, 513, 12000.0f);
+    mTerrainGroup->setFilenameConvention(Ogre::String("IntermediateTutorial2Terrain"), Ogre::String("dat"));
+    mTerrainGroup->setOrigin(Ogre::Vector3::ZERO);
+
+    configureTerrainDefaults(light);
+
+    for (long x = 0; x <= 0; ++x)
+        for (long y = 0; y <= 0; ++y)
+            defineTerrain(x, y);
+
+    // sync load since we want everything in place when we start
+    mTerrainGroup->loadAllTerrains(true);
+
+    if (mTerrainsImported)
+    {
+        Ogre::TerrainGroup::TerrainIterator ti = mTerrainGroup->getTerrainIterator();
+        while(ti.hasMoreElements())
+        {
+            Ogre::Terrain* t = ti.getNext()->instance;
+            initBlendMaps(t);
+        }
+    }
+
+    mTerrainGroup->freeTemporaryResources();
 }
 
 //-------------------------------------------------------------------------------------
 void TutorialApplication::createFrameListener(void)
 {
 	BaseApplication::createFrameListener();
-}
 
-//-------------------------------------------------------------------------------------
-void TutorialApplication::chooseSceneManager(void)
-{
-	// Use the terrain scene manager.
-	//mSceneMgr = mRoot->createSceneManager(Ogre::ST_EXTERIOR_CLOSE);
-	mSceneMgr = mRoot->createSceneManager("Terrain");
+	// Setup default variables
+	mCount = 0;
+	mCurrentObject = NULL;
+	mLMouseDown = false;
+	mRMouseDown = false;
+	mRotateSpeed = .1;
+
+    mInfoLabel = mTrayMgr->createLabel(OgreBites::TL_TOP, "TInfo", "", 350);
 }
 
 //-------------------------------------------------------------------------------------
 bool TutorialApplication::frameRenderingQueued(const Ogre::FrameEvent &evt)
 {
-    return BaseApplication::frameRenderingQueued(evt);
+    bool ret = BaseApplication::frameRenderingQueued(evt);
+
+    // See if terrain group is ready
+    if (mTerrainGroup->isDerivedDataUpdateInProgress())
+    {
+        mTrayMgr->moveWidgetToTray(mInfoLabel, OgreBites::TL_TOP, 0);
+        mInfoLabel->show();
+        if (mTerrainsImported)
+        {
+            mInfoLabel->setCaption("Building terrain, please wait...");
+        }
+        else
+        {
+            mInfoLabel->setCaption("Updating textures, patience...");
+        }
+    }
+    else
+    {
+        mTrayMgr->removeWidgetFromTray(mInfoLabel);
+        mInfoLabel->hide();
+        if (mTerrainsImported)
+        {
+            mTerrainGroup->saveAllTerrains(true);
+            mTerrainsImported = false;
+        }
+    }
+
+	// Get ray for current camera position and see if it intersects with the terrain group
+	Ogre::Vector3 camPos = mCamera->getPosition();
+	Ogre::Ray cameraRay(Ogre::Vector3(camPos.x, 5000.0f, camPos.z), Ogre::Vector3::NEGATIVE_UNIT_Y);
+    Ogre::TerrainGroup::RayResult rayResult = mTerrainGroup->rayIntersects( cameraRay );
+
+    if(rayResult.hit)
+    {
+        // If camera is below height limit, move the camera up
+		Ogre::Real terrainHeight = mTerrainGroup->getHeightAtWorldPosition(rayResult.position);
+		if ((terrainHeight + 10.0f) > camPos.y)
+			mCamera->setPosition( camPos.x, terrainHeight + 10.0f, camPos.z );
+    }
+
+    if (!BaseApplication::frameRenderingQueued(evt))
+		return false;
+
+    return ret;
 }
 
 //-------------------------------------------------------------------------------------
 bool TutorialApplication::mouseMoved(const OIS::MouseEvent &arg)
 {
-    return true;
+	// Update CEGUI with the mouse motion
+	CEGUI::System::getSingleton().injectMouseMove(arg.state.X.rel, arg.state.Y.rel);
+
+	// If we are dragging the left mouse button.
+	if (mLMouseDown)
+	{
+		// Use CEGUI's mouse position and see if its ray intersects with the terrain group
+		CEGUI::Point mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
+		Ogre::Ray mouseRay = mCamera->getCameraToViewportRay(mousePos.d_x/float(arg.state.width),mousePos.d_y/float(arg.state.height));
+        Ogre::TerrainGroup::RayResult rayResult = mTerrainGroup->rayIntersects( mouseRay );
+
+		if (rayResult.hit)
+			mCurrentObject->setPosition(rayResult.position);
+	} // if
+
+	// If we are dragging the right mouse button.
+	else if (mRMouseDown)
+	{
+		mCamera->yaw(Ogre::Degree(-arg.state.X.rel * mRotateSpeed));
+		mCamera->pitch(Ogre::Degree(-arg.state.Y.rel * mRotateSpeed));
+	} // else if
+	return true;
 }
 
 //-------------------------------------------------------------------------------------
 bool TutorialApplication::mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
-    return true;
+	// Left mouse button down
+	if (id == OIS::MB_Left)
+	{
+		// Use CEGUI's mouse position and see if its ray intersects with the terrain group
+		CEGUI::Point mousePos = CEGUI::MouseCursor::getSingleton().getPosition();
+		Ogre::Ray mouseRay = mCamera->getCameraToViewportRay(mousePos.d_x/float(arg.state.width), mousePos.d_y/float(arg.state.height));
+        Ogre::TerrainGroup::RayResult rayResult = mTerrainGroup->rayIntersects( mouseRay );
+
+		// Get results, create a node/entity on the position
+		if (rayResult.hit)
+		{
+			char name[16];
+			sprintf( name, "Robot%d", mCount++ );
+			Ogre::Entity *ent = mSceneMgr->createEntity(name, "robot.mesh");
+			mCurrentObject = mSceneMgr->getRootSceneNode()->createChildSceneNode(std::string(name)+ "Node", rayResult.position);
+			mCurrentObject->attachObject(ent);
+			mCurrentObject->setScale(0.1f, 0.1f, 0.1f);
+		} // if
+		mLMouseDown = true;
+	} // if
+
+
+	// Right mouse button down
+	else if (id == OIS::MB_Right)
+	{
+		CEGUI::MouseCursor::getSingleton().hide();
+		mRMouseDown = true;
+	} // else if
+
+	return true;
 }
 
 //-------------------------------------------------------------------------------------
 bool TutorialApplication::mouseReleased(const OIS::MouseEvent &arg, OIS::MouseButtonID id)
 {
-    return true;
+	// Left mouse button up
+    if (id == OIS::MB_Left)
+    {
+        mLMouseDown = false;
+    } // if
+
+    // Right mouse button up
+    else if (id == OIS::MB_Right)
+    {
+        CEGUI::MouseCursor::getSingleton().show();
+        mRMouseDown = false;
+    } // else if
+	return true;
 }
+
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
