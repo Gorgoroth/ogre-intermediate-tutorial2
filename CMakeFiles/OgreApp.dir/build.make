@@ -109,6 +109,8 @@ dist/bin/OgreApp: /usr/local/lib/libOgreMain.so
 dist/bin/OgreApp: /usr/lib/libboost_thread-mt.so
 dist/bin/OgreApp: /usr/lib/libboost_date_time-mt.so
 dist/bin/OgreApp: /usr/lib/libOIS.so
+dist/bin/OgreApp: /usr/local/lib/libCEGUIBase.so
+dist/bin/OgreApp: /usr/local/lib/libCEGUIOgreRenderer.so
 dist/bin/OgreApp: CMakeFiles/OgreApp.dir/build.make
 dist/bin/OgreApp: CMakeFiles/OgreApp.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable dist/bin/OgreApp"

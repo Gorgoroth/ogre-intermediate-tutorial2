@@ -34,6 +34,7 @@
             <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include" />
             <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed" />
             <Add directory="/usr/local/include" />
+            <Add directory="/usr/local/include/CEGUI" />
             <Add directory="/usr/local/include/OGRE" />
             <Add directory="/usr/local/share/OGRE/samples/Common/include" />
          </Compiler>
@@ -61,6 +62,7 @@
             <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include" />
             <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed" />
             <Add directory="/usr/local/include" />
+            <Add directory="/usr/local/include/CEGUI" />
             <Add directory="/usr/local/include/OGRE" />
             <Add directory="/usr/local/share/OGRE/samples/Common/include" />
          </Compiler>
@@ -156,6 +158,30 @@
           <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
       </Unit>
       <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/FindPkgMacros.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
+      </Unit>
+      <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/FindCEGUI.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
+      </Unit>
+      <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/FindPkgMacros.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
+      </Unit>
+      <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/PreprocessorUtils.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
+      </Unit>
+      <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/FindCEGUIOGRE.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
+      </Unit>
+      <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/DetermineVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
+      </Unit>
+      <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/FindPackageHandleAdvancedArgs.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
+      </Unit>
+      <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/CompareVersionStrings.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
+      </Unit>
+      <Unit filename="/home/vk/Games/ogre3d/ogre-intermediate-tutorial2/../../../../../usr/local/lib/OGRE/cmake/HandleLibraryTypes.cmake">
           <Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\OGRE\cmake\" />
       </Unit>
    </Project>

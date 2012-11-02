@@ -222,6 +222,46 @@ CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o
  /usr/include/OIS/OISMouse.h
  /usr/include/OIS/OISObject.h
  /usr/include/OIS/OISPrereqs.h
+ /usr/local/include/CEGUI/CEGUIBase.h
+ /usr/local/include/CEGUI/CEGUIBoundSlot.h
+ /usr/local/include/CEGUI/CEGUIConfig.h
+ /usr/local/include/CEGUI/CEGUIDataContainer.h
+ /usr/local/include/CEGUI/CEGUIEvent.h
+ /usr/local/include/CEGUI/CEGUIEventArgs.h
+ /usr/local/include/CEGUI/CEGUIEventSet.h
+ /usr/local/include/CEGUI/CEGUIExceptions.h
+ /usr/local/include/CEGUI/CEGUIForwardRefs.h
+ /usr/local/include/CEGUI/CEGUIFreeFunctionSlot.h
+ /usr/local/include/CEGUI/CEGUIFunctorCopySlot.h
+ /usr/local/include/CEGUI/CEGUIFunctorPointerSlot.h
+ /usr/local/include/CEGUI/CEGUIFunctorReferenceBinder.h
+ /usr/local/include/CEGUI/CEGUIFunctorReferenceSlot.h
+ /usr/local/include/CEGUI/CEGUIInputEvent.h
+ /usr/local/include/CEGUI/CEGUIIteratorBase.h
+ /usr/local/include/CEGUI/CEGUILogger.h
+ /usr/local/include/CEGUI/CEGUIMemberFunctionSlot.h
+ /usr/local/include/CEGUI/CEGUIMouseCursor.h
+ /usr/local/include/CEGUI/CEGUINamedXMLResourceManager.h
+ /usr/local/include/CEGUI/CEGUIRect.h
+ /usr/local/include/CEGUI/CEGUIRefCounted.h
+ /usr/local/include/CEGUI/CEGUIRenderer.h
+ /usr/local/include/CEGUI/CEGUIResourceProvider.h
+ /usr/local/include/CEGUI/CEGUIScheme.h
+ /usr/local/include/CEGUI/CEGUISchemeManager.h
+ /usr/local/include/CEGUI/CEGUIScheme_xmlHandler.h
+ /usr/local/include/CEGUI/CEGUISingleton.h
+ /usr/local/include/CEGUI/CEGUISlotFunctorBase.h
+ /usr/local/include/CEGUI/CEGUIString.h
+ /usr/local/include/CEGUI/CEGUISubscriberSlot.h
+ /usr/local/include/CEGUI/CEGUISystem.h
+ /usr/local/include/CEGUI/CEGUIUDim.h
+ /usr/local/include/CEGUI/CEGUIVector.h
+ /usr/local/include/CEGUI/CEGUIVersion.h
+ /usr/local/include/CEGUI/CEGUIXMLHandler.h
+ /usr/local/include/CEGUI/RendererModules/Ogre/../../CEGUIRenderer.h
+ /usr/local/include/CEGUI/RendererModules/Ogre/../../CEGUISize.h
+ /usr/local/include/CEGUI/RendererModules/Ogre/../../CEGUIVector.h
+ /usr/local/include/CEGUI/RendererModules/Ogre/CEGUIOgreRenderer.h
  /usr/local/include/OGRE/GLX/../OgrePrerequisites.h
  /usr/local/include/OGRE/GLX/OgreTimerImp.h
  /usr/local/include/OGRE/Ogre.h
