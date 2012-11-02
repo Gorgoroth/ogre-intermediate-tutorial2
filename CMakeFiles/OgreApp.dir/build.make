@@ -106,6 +106,7 @@ OgreApp_EXTERNAL_OBJECTS =
 dist/bin/OgreApp: CMakeFiles/OgreApp.dir/BaseApplication.cpp.o
 dist/bin/OgreApp: CMakeFiles/OgreApp.dir/TutorialApplication.cpp.o
 dist/bin/OgreApp: /usr/local/lib/libOgreMain.so
+dist/bin/OgreApp: /usr/local/lib/libOgreTerrain.so
 dist/bin/OgreApp: /usr/lib/libboost_thread-mt.so
 dist/bin/OgreApp: /usr/lib/libboost_date_time-mt.so
 dist/bin/OgreApp: /usr/lib/libOIS.so

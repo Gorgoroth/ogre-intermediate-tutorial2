@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="all" />
+	<ActiveTarget name="install" />
+	<File name="BaseApplication.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="4012" topLine="54" />
+	</File>
+	<File name="TutorialApplication.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="1315" topLine="22" />
+	</File>
+	<File name="TutorialApplication.h" open="1" top="0" tabpos="2">
+		<Cursor position="1895" topLine="0" />
+	</File>
 </CodeBlocks_layout_file>

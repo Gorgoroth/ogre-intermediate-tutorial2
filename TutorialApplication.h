@@ -19,6 +19,9 @@ This source file is part of the
 
 #include "BaseApplication.h"
 
+#include <Terrain/OgreTerrain.h>
+#include <Terrain/OgreTerrainGroup.h>
+
 class TutorialApplication : public BaseApplication
 {
 public:
@@ -27,23 +30,30 @@ public:
 
 protected:
     virtual void createScene(void);
+    virtual void destroyScene(void);
     virtual void chooseSceneManager(void);
     virtual void createFrameListener(void);
-    //frame listener
-    virtual bool frameRenderingQueued(const Ogre::FrameEvent &evt);
-    //mouse listener
-    virtual bool mouseMoved(const OIS::MouseEvent &arg);
+    virtual bool frameRenderingQueued(const Ogre::FrameEvent &evt); //frame listener
+    virtual bool mouseMoved(const OIS::MouseEvent &arg); //mouse listener
     virtual bool mousePressed(const OIS::MouseEvent &arg,OIS::MouseButtonID id);
     virtual bool mouseReleased(const OIS::MouseEvent &arg,OIS::MouseButtonID id);
 
-
-protected:
     Ogre::RaySceneQuery *mRaySceneQuery;// The ray scene query pointer
     bool mLMouseDown, mRMouseDown;		// True if the mouse buttons are down
     int mCount;							// The number of robots on the screen
     Ogre::SceneNode *mCurrentObject;	// The newly created object
     CEGUI::Renderer *mGUIRenderer;		// CEGUI renderer
     float mRotateSpeed;
+
+private:
+    Ogre::TerrainGlobalOptions* mTerrainGlobals;
+    Ogre::TerrainGroup* mTerrainGroup;
+    bool mTerrainsImported;
+    OgreBites::Label* mInfoLabel;
+
+    void defineTerrain(long x, long y);
+    void initBlendMaps(Ogre::Terrain* terrain);
+    void configureTerrainDefaults(Ogre::Light* light);
 };
 
 #endif // #ifndef __TutorialApplication_h_
